@@ -57,17 +57,20 @@ def convert_image(im):
             r = data_float[i, j, 0]
             g = data_float[i, j, 1]
             b = data_float[i, j, 2]
-            d_min = float('inf')
-            idx_min = 0
-            for k in range(len(j_map)):
-                rk = j_map[k, 0]
-                gk = j_map[k, 1]
-                bk = j_map[k, 2]
-                d = (r - rk) * (r - rk) + (g - gk) * (g - gk) + (b - bk) * (b - bk)
-                if d < d_min:
-                    idx_min = k
-                    d_min = d
-            data_out[i, j] = v_map[idx_min]
+            if is_grey(r, g, b):
+                data_out[i, j] = np.array([r, g, b, 255])
+            else:
+                d_min = float('inf')
+                idx_min = 0
+                for k in range(len(j_map)):
+                    rk = j_map[k, 0]
+                    gk = j_map[k, 1]
+                    bk = j_map[k, 2]
+                    d = (r - rk) * (r - rk) + (g - gk) * (g - gk) + (b - bk) * (b - bk)
+                    if d < d_min:
+                        idx_min = k
+                        d_min = d
+                data_out[i, j] = v_map[idx_min]
     im2 = Image.fromarray(data_out.astype(data.dtype), mode="RGBA")
     return im2
 
