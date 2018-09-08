@@ -2,7 +2,8 @@
 
 ## v0.3.0
 
-- XXX
+- new: error management when reading and writing images
+- new: management of color modes different to RGBA
 - new: grey pixels management
 
 ## v0.2.0
