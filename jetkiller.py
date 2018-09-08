@@ -78,18 +78,29 @@ def convert_image(im):
 
 
 def jetkiller(input_filename, output_filename):
+    # Read input image
     try:
         input_image_data = read_image(input_filename)
     except Exception as e:
+        # Abort on errors
         print(e, file=sys.stderr)
-        exit(1)
+        exit(type(e).__name__)
+
+    # Convert image to new colormap
     output_image_data = convert_image(input_image_data)
-    write_image(output_filename, output_image_data)
+
+    # Write output image
+    try:
+        write_image(output_filename, output_image_data)
+    except Exception as e:
+        # Abort on errors
+        print(e, file=sys.stderr)
+        exit(type(e).__name__)
 
 
 if __name__ == "__main__":
     import time
     start = time.time()
-    jetkiller("tests/test_input_2.png", "tests/test_result_viridis{}.png".format(start))
+    jetkiller("tests/test_input_1.png", "tests/test_result_viridis{}.png".format(start))
     end = time.time()
     print(end - start)
