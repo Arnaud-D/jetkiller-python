@@ -2,11 +2,13 @@ from PIL import Image
 import numpy as np
 import matplotlib as mpl
 from matplotlib import cm
+import sys
 
 
 def read_image(input_filename):
-    im = Image.open(input_filename)
-    return im
+    im = Image.open(input_filename, mode="r")
+    im_converted = im.convert(mode="RGBA")
+    return im_converted
 
 
 def write_image(output_filename, im):
@@ -14,7 +16,7 @@ def write_image(output_filename, im):
 
 
 def viridis_map():
-    cmap = np.round(np.array(cm.viridis.colors) * 256)
+    cmap = np.round(np.array(cm.get_cmap("viridis").colors) * 256)
     return np.array([(list(m) + [255]) for m in cmap], dtype=float)
 
 
@@ -76,7 +78,11 @@ def convert_image(im):
 
 
 def jetkiller(input_filename, output_filename):
-    input_image_data = read_image(input_filename)
+    try:
+        input_image_data = read_image(input_filename)
+    except Exception as e:
+        print(e, file=sys.stderr)
+        exit(1)
     output_image_data = convert_image(input_image_data)
     write_image(output_filename, output_image_data)
 
@@ -84,6 +90,6 @@ def jetkiller(input_filename, output_filename):
 if __name__ == "__main__":
     import time
     start = time.time()
-    jetkiller("tests/test_input_1.png", "tests/test_result_viridis{}.png".format(start))
+    jetkiller("tests/test_input_2.png", "tests/test_result_viridis{}.png".format(start))
     end = time.time()
     print(end - start)
