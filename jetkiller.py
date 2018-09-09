@@ -4,15 +4,16 @@ import matplotlib as mpl
 from matplotlib import cm
 import sys
 import argparse
+import functools
 
 
 # Parameters of internal image representation
-internal_mode = "RGBA"
+internal_mode = "RGB"
 internal_type = float
 
 
 def read_image(input_filename):
-    im = Image.open(input_filename, mode="r")
+    im = Image.open(input_filename)
     im_converted = im.convert(mode=internal_mode)
     return im_converted
 
@@ -23,7 +24,7 @@ def write_image(output_filename, im):
 
 def viridis_map():
     cmap = np.round(np.array(cm.get_cmap("viridis").colors) * 256)
-    return np.array([(list(m) + [255]) for m in cmap], dtype=internal_type)
+    return np.array(cmap, dtype=internal_type)
 
 
 def jet_map():
@@ -33,34 +34,31 @@ def jet_map():
     b = mpl.colors.makeMappingArray(256, cm.jet._segmentdata['blue']) * n
     data = np.zeros_like(viridis_map())
     for i in range(len(r)):
-        data[i, 0] = round(r[i])
-        data[i, 1] = round(g[i])
-        data[i, 2] = round(b[i])
-    return np.array([[d[0], d[1], d[2], 255] for d in data], dtype=internal_type)
+        data[i, 0] = r[i]
+        data[i, 1] = g[i]
+        data[i, 2] = b[i]
+    return np.array(np.around(data), dtype=internal_type)
 
 
 def convert_image(im, input_cmap, output_cmap):
-    input_data = np.asarray(im)
-    output_data = np.zeros_like(input_data)
-    for i in range(len(input_data)):
-        for j in range(len(input_data[i])):
-            r = input_data[i, j, 0]
-            g = input_data[i, j, 1]
-            b = input_data[i, j, 2]
-            if r == g and g == b:  # Grey pixels
-                output_data[i, j, 0] = r
-                output_data[i, j, 1] = g
-                output_data[i, j, 2] = b
-                output_data[i, j, 3] = 255
-            else:  # Other pixels
-                r_t = (input_cmap[:, 0] - r)
-                b_t = (input_cmap[:, 1] - g)
-                c_t = (input_cmap[:, 2] - b)
-                d = r_t * r_t + b_t * b_t + c_t * c_t
-                idx_min = np.argmin(d)
-                output_data[i, j] = output_cmap[idx_min]
-    output = Image.fromarray(output_data, mode=internal_mode)
-    return output
+    data = np.asarray(im)
+    data.setflags(write=True)
+
+    @functools.lru_cache(maxsize=1024)
+    def convert_pixel(red, green, blue):
+        dr = input_cmap[:, 0] - red
+        dg = input_cmap[:, 1] - green
+        db = input_cmap[:, 2] - blue
+        dist = dr * dr + dg * dg + db * db
+        idx = np.argmin(dist)
+        return output_cmap[idx]
+
+    for i in range(data.shape[0]):
+        for j in range(data.shape[1]):
+            r, g, b = data[i, j, 0], data[i, j, 1], data[i, j, 2]
+            if r != g or g != b:  # We do nothing for grey pixels
+                data[i, j] = convert_pixel(r, g, b)
+    return Image.fromarray(data, mode=internal_mode)
 
 
 def jetkiller(input_filename, output_filename):
