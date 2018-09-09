@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.5.0
+
+- fix: massive performace improvements (10x faster, thanks caching !)
+
 ## v0.4.0
 
 - new: command line interface
