@@ -5,7 +5,7 @@
 - new: command line interface
 - fix: massive performance improvement (10x faster)
 
-## v0.3.0
+## v0.3.0 /  v0.3.1
 
 - new: error management when reading and writing images
 - new: management of color modes different to RGBA
