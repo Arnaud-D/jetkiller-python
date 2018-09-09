@@ -33,17 +33,6 @@ def jet_map():
     return np.array([[d[0], d[1], d[2], 255] for d in data], dtype=float)
 
 
-def convert_pixel(p, from_map, to_map):
-    d_min = float('inf')
-    idx_min = 0
-    for k in range(len(from_map)):
-        d = (p[0] - from_map[k][0]) ** 2 + (p[1] - from_map[k][1]) ** 2 + (p[2] - from_map[k][2]) ** 2
-        if d < d_min:
-            idx_min = k
-            d_min = d
-    return to_map[idx_min]
-
-
 def is_grey(r, g, b):
     return r == g and r == b
 
@@ -62,16 +51,8 @@ def convert_image(im):
             if is_grey(r, g, b):
                 data_out[i, j] = np.array([r, g, b, 255])
             else:
-                d_min = float('inf')
-                idx_min = 0
-                for k in range(len(j_map)):
-                    rk = j_map[k, 0]
-                    gk = j_map[k, 1]
-                    bk = j_map[k, 2]
-                    d = (r - rk) * (r - rk) + (g - gk) * (g - gk) + (b - bk) * (b - bk)
-                    if d < d_min:
-                        idx_min = k
-                        d_min = d
+                d = (j_map[:, 0] - r) ** 2 + (j_map[:, 1] - g) ** 2 + (j_map[:, 2] - b) ** 2
+                idx_min = np.argmin(d)
                 data_out[i, j] = v_map[idx_min]
     im2 = Image.fromarray(data_out.astype(data.dtype), mode="RGBA")
     return im2
@@ -98,9 +79,10 @@ def jetkiller(input_filename, output_filename):
         exit(type(e).__name__)
 
 
+def main():
+    jetkiller("tests/test_input_1.png", "tests/test_result_viridis_.png")
+
+
 if __name__ == "__main__":
-    import time
-    start = time.time()
-    jetkiller("tests/test_input_1.png", "tests/test_result_viridis{}.png".format(start))
-    end = time.time()
-    print(end - start)
+    import cProfile
+    cProfile.run("main()")
