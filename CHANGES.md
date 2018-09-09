@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.4.0
+
+
+- fix: massive performance improvement (10x faster)
+
 ## v0.3.0
 
 - new: error management when reading and writing images
