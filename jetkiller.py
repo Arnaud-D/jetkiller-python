@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib as mpl
 from matplotlib import cm
 import sys
+import argparse
 
 
 # Parameters of internal image representation
@@ -73,9 +74,19 @@ def jetkiller(input_filename, output_filename):
     write_image(output_filename, output_image_data)
 
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input_file")
+    parser.add_argument("output_file")
+    args = parser.parse_args()
+    return args
+
+
 def main():
+    args = parse_args()
+
     try:
-        jetkiller("tests/test_input_2.png", "tests/test_result_viridis__.png")
+        jetkiller(args.input_file, args.output_file)
     except Exception as e:
         # Abort on errors
         print(e, file=sys.stderr)
@@ -83,5 +94,4 @@ def main():
 
 
 if __name__ == "__main__":
-    import cProfile
-    cProfile.run("main()")
+    main()

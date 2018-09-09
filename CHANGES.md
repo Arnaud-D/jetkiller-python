@@ -2,7 +2,7 @@
 
 ## v0.4.0
 
-
+- new: command line interface
 - fix: massive performance improvement (10x faster)
 
 ## v0.3.0
