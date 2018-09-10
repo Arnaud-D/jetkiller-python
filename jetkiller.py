@@ -2,8 +2,6 @@ from PIL import Image
 import numpy as np
 import matplotlib as mpl
 from matplotlib import cm
-import sys
-import argparse
 import functools
 
 
@@ -70,26 +68,3 @@ def jetkiller(input_filename, output_filename):
     output_image_data = convert_image(input_image_data, input_cmap, output_cmap)
     # Write output image
     write_image(output_filename, output_image_data)
-
-
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("input_file")
-    parser.add_argument("output_file")
-    args = parser.parse_args()
-    return args
-
-
-def main():
-    args = parse_args()
-
-    try:
-        jetkiller(args.input_file, args.output_file)
-    except Exception as e:
-        # Abort on errors
-        print(e, file=sys.stderr)
-        exit(type(e).__name__)
-
-
-if __name__ == "__main__":
-    main()
