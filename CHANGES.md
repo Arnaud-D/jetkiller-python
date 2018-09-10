@@ -1,5 +1,11 @@
 # Change Log
 
+## Roadmap for future releases
+
+- automated tests
+- installation guide
+- user guide
+
 ## v0.5.0
 
 - fix: massive performance improvements (10x faster, thanks caching!)
