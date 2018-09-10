@@ -5,6 +5,7 @@
 - automated tests
 - installation guide
 - user guide
+- choice of output colormap
 
 ## v0.5.0
 
