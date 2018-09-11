@@ -11,21 +11,25 @@ internal_type = float
 
 
 def read_image(input_filename):
+    """Read an image from a file."""
     im = Image.open(input_filename)
     im_converted = im.convert(mode=internal_mode)
     return im_converted
 
 
 def write_image(output_filename, im):
+    """Save an image to a file."""
     im.save(output_filename)
 
 
 def viridis_map():
+    """Return the "virdis" colormap."""
     cmap = np.round(np.array(cm.get_cmap("viridis").colors) * 256)
     return np.array(cmap, dtype=internal_type)
 
 
 def jet_map():
+    """Return the "jet" colormap."""
     n = 256
     r = mpl.colors.makeMappingArray(256, cm.jet._segmentdata['red']) * n
     g = mpl.colors.makeMappingArray(256, cm.jet._segmentdata['green']) * n
@@ -39,11 +43,14 @@ def jet_map():
 
 
 def convert_image(im, input_cmap, output_cmap):
+    """Convert an image from a colormap to another."""
     data = np.asarray(im)
     data.setflags(write=True)
 
     @functools.lru_cache(maxsize=1024)
     def convert_pixel(red, green, blue):
+        # Get nearest color from input colormap and return
+        # corresponding color in output colormap
         dr = input_cmap[:, 0] - red
         dg = input_cmap[:, 1] - green
         db = input_cmap[:, 2] - blue
@@ -51,20 +58,20 @@ def convert_image(im, input_cmap, output_cmap):
         idx = np.argmin(dist)
         return output_cmap[idx]
 
-    for i in range(data.shape[0]):
-        for j in range(data.shape[1]):
+    dim1 = range(data.shape[0])
+    dim2 = range(data.shape[1])
+    for i in dim1:
+        for j in dim2:
             r, g, b = data[i, j, 0], data[i, j, 1], data[i, j, 2]
-            if r != g or g != b:  # We do nothing for grey pixels
+            if r != g or g != b:  # Grey pixels are not processed
                 data[i, j] = convert_pixel(r, g, b)
     return Image.fromarray(data, mode=internal_mode)
 
 
-def jetkiller(input_filename, output_filename):
-    # Read input image
+def jetkiller(input_filename, output_filename="output.png"):
+    """Convert an image file's colormap from "jet" to "viridis"."""
     input_image_data = read_image(input_filename)
-    # Convert image to new colormap
     input_cmap = jet_map()
     output_cmap = viridis_map()
     output_image_data = convert_image(input_image_data, input_cmap, output_cmap)
-    # Write output image
     write_image(output_filename, output_image_data)
