@@ -7,7 +7,7 @@ def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument("input_file")
-    parser.add_argument("output_file")
+    parser.add_argument("output_file", nargs="?", default="output.png")
     args = parser.parse_args()
     return args
 

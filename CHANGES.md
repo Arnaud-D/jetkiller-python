@@ -7,6 +7,10 @@
 - user guide
 - choice of output colormap
 
+## v0.6.0
+
+- new: `output_file` argument is now optional (default: "output.png").
+
 ## v0.5.0
 
 - fix: massive performance improvements (10x faster, thanks caching!)
