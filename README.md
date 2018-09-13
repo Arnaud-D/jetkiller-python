@@ -24,7 +24,7 @@ To install Jet Killer, use the following command :
 pip install jetkiller
 ```
 
-It will install the `jetkiller` command described below.
+It will make the `jetkiller` command described below available.
 
 ## Usage
 
@@ -37,13 +37,13 @@ jetkiller input_file output_file
 ```
 
 If you omit the `output_file`, Jet Killer converts `input_file` to
-the default output file `output.png`:
+the default output file "output.png":
 
 ```
 jetkiller input_file
 ```
 
-If `output.png` already exists, it is overwritten without any warning.
+If "output.png" already exists, it is overwritten without any warning.
 
 
 ## Release History
@@ -51,7 +51,7 @@ If `output.png` already exists, it is overwritten without any warning.
 All releases of this project are listed on the tag page of this
 repository.
 
-See `CHANGES.md` for more details on the content of each release.
+See [CHANGES.md](CHANGES.md) for more details on the content of each release.
 
 
 ## Versioning
@@ -63,5 +63,5 @@ numbers.
 
 ## License
 
-Jet Killer is distributed under the MIT License. See LICENSE-MIT for
-more details.
+Jet Killer is distributed under the MIT License. See
+[LICENSE-MIT](LICENSE-MIT) for more details.
