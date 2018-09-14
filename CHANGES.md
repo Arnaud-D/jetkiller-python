@@ -2,13 +2,14 @@
 
 ## Roadmap for future releases
 
-- automated tests
-- installation guide
-- user guide
+- installation process and instructions
 - choice of output colormap
+- automated tests
 
 ## v0.6.0
 
+- new: jetkiller is now an importable and executable package.
+- new: basic user instructions in README.md.
 - new: `output_file` argument is now optional (default: "output.png").
 
 ## v0.5.0
