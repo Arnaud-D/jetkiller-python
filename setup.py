@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="jetkiller",
-    version="0.6.3",
+    version="0.7.0",
     author="Arnaud-D",
     description="Enhance data visualisations using the \"jet\" colormap.",
     long_description=long_description,
@@ -16,4 +16,9 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
     ],
     install_requires=["pillow", "numpy", "matplotlib"],
+    entry_points={
+        'console_scripts': [
+            'jetkiller = jetkiller.__main__:main',
+        ],
+    }
 )
