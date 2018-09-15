@@ -18,32 +18,57 @@ the original dataset is unavailable. Use cases include :
 
 ## Installation
 
-To install Jet Killer, use the following command :
+The following command installs the `jetkiller` command
+and the `jetkiller` package:
 
 ```
 pip install jetkiller
 ```
 
-It will make the `jetkiller` command described below available.
 
 ## Usage
 
-Jet Killer is designed to be used from the command line.
+### From the command line
 
-The following command converts `input_file` to `output_file`:
+Jet Killer is designed to be used mainly from the command line.
+
+Use the following command to convert `input_file` to `output_file`:
 
 ```
 jetkiller input_file output_file
 ```
 
-If you omit the `output_file`, Jet Killer converts `input_file` to
-the default output file "output.png":
+If you omit the argument `output_file`, Jet Killer converts
+`input_file` to "output.png" by default:
 
 ```
 jetkiller input_file
 ```
 
-If "output.png" already exists, it is overwritten without any warning.
+If the file "output.png" already exists, it is overwritten without any
+warning.
+
+
+### From Python
+
+If you wish to use Jet Killer from Python, you can
+import the `jetkiller` package and use the `jetkiller` function:
+
+```python
+import jetkiller as jk
+jk.jetkiller("input_image.png", "output_image.png")
+```
+
+The second argument is optional and defaults to "output.png", so that
+you can write:
+
+```python
+import jetkiller as jk
+jk.jetkiller("input_image.png")
+```
+
+If the file "output.png" already exists, it is overwritten without any
+warning.
 
 
 ## Release History
