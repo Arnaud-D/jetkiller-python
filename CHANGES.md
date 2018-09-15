@@ -2,9 +2,14 @@
 
 ## Roadmap for future releases
 
-- installation process and instructions
 - choice of output colormap
 - automated tests
+
+## v0.7.0
+
+- new: installation with pip, including the jetkiller package and
+  command.
+- fix: user guide is now compliant with the actual behaviour.
 
 ## v0.6.0
 
