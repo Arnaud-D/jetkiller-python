@@ -1,8 +1,8 @@
 # Jet Killer
 
-Jet Killer converts images using the "jet" colormap to the "viridis"
-colormap by using directly the pixel values, without any knowledge
-about the underlying data.
+Jet Killer converts images using the "jet" colormap to a better
+one (by default "viridis") by using directly the pixel values,
+without any knowledge about the underlying data.
 
 It can be used as a tool to enhance data visualizations for which
 the original dataset is unavailable. Use cases include :
@@ -48,6 +48,14 @@ jetkiller input_file
 If the file "output.png" already exists, it is overwritten without any
 warning.
 
+You can change the output colormap (by default "viridis") with
+the `--colormap` option. Any value from the
+[matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
+is recognized. Here is an example using the colormap "inferno":
+
+```
+jetkiller input_file output_file --colormap inferno
+```
 
 ### From Python
 
@@ -69,6 +77,16 @@ jk.jetkiller("input_image.png")
 
 If the file "output.png" already exists, it is overwritten without any
 warning.
+
+You can change the output colormap (by default "viridis") with
+the `colormap` arugment. Any value from the
+[matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
+is recognized.
+
+```python
+import jetkiller as jk
+jk.jetkiller("input_image.png", "output_image.png", colormap="inferno")
+```
 
 
 ## Release History
