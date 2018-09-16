@@ -2,8 +2,12 @@
 
 ## Roadmap for future releases
 
-- choice of output colormap
 - automated tests
+
+## v0.8.0
+
+- new: the output colormap can be changed (from command-line or
+  from Python).
 
 ## v0.7.0
 
