@@ -2,7 +2,9 @@
 
 ## Roadmap for future releases
 
-- automated tests
+- automated tests,
+- direct interface to and from the Image type of Pillow,
+- PDF read/write.
 
 ## v0.8.0
 
