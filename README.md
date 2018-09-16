@@ -79,7 +79,7 @@ If the file "output.png" already exists, it is overwritten without any
 warning.
 
 You can change the output colormap (by default "viridis") with
-the `colormap` arugment. Any value from the
+the `colormap` argument. Any value from the
 [matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
 is recognized.
 
