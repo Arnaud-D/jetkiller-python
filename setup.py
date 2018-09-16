@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="jetkiller",
-    version="0.7.0",
+    version="0.8.0",
     author="Arnaud-D",
     description="Enhance data visualisations using the \"jet\" colormap.",
     long_description=long_description,
