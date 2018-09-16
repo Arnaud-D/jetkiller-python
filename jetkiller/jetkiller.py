@@ -4,11 +4,11 @@ from matplotlib import cm
 import functools
 
 
-# Parameters of internal image representation
+# Internal package parameters
 _mode = "RGB"
 _type = float
 _colormap_size = 256
-_nint = 256
+_nint = 255
 _cache_size = 1024
 
 
