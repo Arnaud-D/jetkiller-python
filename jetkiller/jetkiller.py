@@ -1,20 +1,22 @@
 from PIL import Image
 import numpy as np
-import matplotlib as mpl
 from matplotlib import cm
 import functools
 
 
 # Parameters of internal image representation
-internal_mode = "RGB"
-internal_type = float
+_mode = "RGB"
+_type = float
+_colormap_size = 256
+_nint = 256
+_cache_size = 1024
 
 
-def jetkiller(input_filename, output_filename="output.png"):
-    """Convert an image file from the "jet" to the "viridis" colormap."""
+def jetkiller(input_filename, output_filename="output.png", colormap="viridis"):
+    """Convert an image file from the "jet" colormap to a better one."""
     input_image_data = read_image(input_filename)
-    input_cmap = jet_map()
-    output_cmap = viridis_map()
+    input_cmap = get_colormap("jet")
+    output_cmap = get_colormap(colormap)
     output_image_data = convert_image(input_image_data, input_cmap, output_cmap)
     write_image(output_filename, output_image_data)
 
@@ -22,8 +24,18 @@ def jetkiller(input_filename, output_filename="output.png"):
 def read_image(input_filename):
     """Read an image from a file."""
     im = Image.open(input_filename)
-    im_converted = im.convert(mode=internal_mode)
+    im_converted = im.convert(mode=_mode)
     return im_converted
+
+
+def get_colormap(colormap):
+    """Return a colormap as an array. `colormap` is any name recognized by matplotlib."""
+    min_val = 0
+    max_val = 1
+    cmap = cm.get_cmap(colormap, _colormap_size)
+    data = np.linspace(min_val, max_val, _colormap_size)
+    color_table = cmap(data) * _nint
+    return np.array(color_table[:, 0:3], dtype=_type)
 
 
 def convert_image(im, input_cmap, output_cmap):
@@ -31,7 +43,7 @@ def convert_image(im, input_cmap, output_cmap):
     data = np.asarray(im)
     data.setflags(write=True)
 
-    @functools.lru_cache(maxsize=1024)
+    @functools.lru_cache(maxsize=_cache_size)
     def convert_pixel(red, green, blue):
         # Get nearest color from input colormap and return
         # corresponding color in output colormap
@@ -49,29 +61,9 @@ def convert_image(im, input_cmap, output_cmap):
             r, g, b = data[i, j, 0], data[i, j, 1], data[i, j, 2]
             if r != g or g != b:  # Grey pixels are not processed
                 data[i, j] = convert_pixel(r, g, b)
-    return Image.fromarray(data, mode=internal_mode)
+    return Image.fromarray(data, mode=_mode)
 
 
 def write_image(output_filename, im):
     """Save an image to a file."""
     im.save(output_filename)
-
-
-def viridis_map():
-    """Return the "virdis" colormap as an array."""
-    cmap = np.round(np.array(cm.get_cmap("viridis").colors) * 256)
-    return np.array(cmap, dtype=internal_type)
-
-
-def jet_map():
-    """Return the "jet" colormap as an array."""
-    n = 256
-    r = mpl.colors.makeMappingArray(256, cm.jet._segmentdata['red']) * n
-    g = mpl.colors.makeMappingArray(256, cm.jet._segmentdata['green']) * n
-    b = mpl.colors.makeMappingArray(256, cm.jet._segmentdata['blue']) * n
-    data = np.zeros_like(viridis_map())
-    for i in range(len(r)):
-        data[i, 0] = r[i]
-        data[i, 1] = g[i]
-        data[i, 2] = b[i]
-    return np.array(np.around(data), dtype=internal_type)
