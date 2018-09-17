@@ -1,11 +1,5 @@
 # Change Log
 
-## Roadmap for future releases
-
-- automated tests,
-- direct interface to and from the Image type of Pillow,
-- PDF read/write.
-
 ## v0.8.0
 
 - new: the output colormap can be changed (from command-line or
