@@ -1,1 +1,1 @@
-from .jetkiller import jetkiller
+from jetkiller import *
