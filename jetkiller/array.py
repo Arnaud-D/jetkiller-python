@@ -20,10 +20,10 @@ def get_colormap(colormap):
     return np.array(color_table[:, 0:3], dtype=_type)
 
 
-def convert_array(data, colormap=cfg.default_colormap):
+def convert_array(data, colormap=cfg.default_output_colormap):
     """Convert an image array from the "jet" colormap to a better one."""
 
-    input_cmap = get_colormap(cfg.jet_name)
+    input_cmap = get_colormap(cfg.default_input_colormap)
     output_cmap = get_colormap(colormap)
 
     @functools.lru_cache(maxsize=_cache_size)

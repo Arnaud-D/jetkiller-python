@@ -3,7 +3,7 @@ import jetkiller.image as jkim
 import jetkiller.config as cfg
 
 
-def convert_file(input_filename, output_filename=cfg.default_output_file, colormap=cfg.default_colormap):
+def convert_file(input_filename, output_filename=cfg.default_output_file, colormap=cfg.default_output_colormap):
     """Convert an image file from the "jet" colormap to a better one."""
     input_image_data = read_image(input_filename)
     output_image_data = jkim.convert_image(input_image_data, colormap)

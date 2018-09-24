@@ -4,7 +4,7 @@ import jetkiller.config as cfg
 import jetkiller.array as jkar
 
 
-def convert_image(image, colormap=cfg.default_colormap):
+def convert_image(image, colormap=cfg.default_output_colormap):
     """Convert an image from the "jet colormap" to a better one."""
     data = image2array(image)
     data = jkar.convert_array(data, colormap)
