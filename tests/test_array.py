@@ -6,7 +6,7 @@ import pytest
 
 @pytest.fixture
 def data_array():
-    return np.around(np.random.rand(250, 151, 3) * jkar._nint)
+    return np.array([[[128, 128, 128], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]], [[254, 254, 255], [255, 255, 255]]])
 
 
 def test_get_colormap_1():
@@ -48,4 +48,4 @@ def test_convert_array_3(data_array):
     data = jkar.convert_array(data_array, "viridis")
     for i in dim1:
         for j in dim2:
-            assert data[i, j] in cmap
+            assert (data[i, j] in cmap) or (data[i, j, 0] == data[i, j, 1] and data[i, j, 1] == data[i, j, 2])
