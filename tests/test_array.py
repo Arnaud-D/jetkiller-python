@@ -1,5 +1,6 @@
 import numpy as np
 import jetkiller.array as jkar
+import jetkiller.config as cfg
 import pytest
 
 
@@ -9,11 +10,11 @@ def data_array():
 
 
 def test_get_colormap_1():
-    assert jkar.get_colormap("viridis").shape == (jkar._colormap_size, jkar._ncomponents)
+    assert jkar.get_colormap("viridis").shape == (jkar._colormap_size, len(cfg.mode))
 
 
 def test_get_colormap_2():
-    assert jkar.get_colormap("jet").shape == (jkar._colormap_size, jkar._ncomponents)
+    assert jkar.get_colormap("jet").shape == (jkar._colormap_size, len(cfg.mode))
 
 
 def test_get_colormap_3():

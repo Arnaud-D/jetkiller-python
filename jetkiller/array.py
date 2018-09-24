@@ -8,7 +8,6 @@ _colormap_size = 256
 _nint = 255
 _type = float
 _cache_size = 1024
-_ncomponents = 3
 
 
 def get_colormap(colormap):
@@ -18,7 +17,7 @@ def get_colormap(colormap):
     cmap = cm.get_cmap(colormap, _colormap_size)
     data = np.linspace(min_val, max_val, _colormap_size)
     color_table = np.around(cmap(data) * _nint)
-    return np.array(color_table[:, 0:_ncomponents], dtype=_type)
+    return np.array(color_table[:, 0:len(cfg.mode)], dtype=_type)
 
 
 def convert_array(data, colormap=cfg.default_output_colormap):
