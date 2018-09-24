@@ -39,3 +39,13 @@ def test_convert_array_1(data_array):
 
 def test_convert_array_2(data_array):
     assert (jkar.convert_array(data_array) % 1 == 0).all()
+
+
+def test_convert_array_3(data_array):
+    cmap = jkar.get_colormap("viridis")
+    dim1 = range(data_array.shape[0])
+    dim2 = range(data_array.shape[1])
+    data = jkar.convert_array(data_array, "viridis")
+    for i in dim1:
+        for j in dim2:
+            assert data[i, j] in cmap
