@@ -124,7 +124,7 @@ import jetkiller
 jetkiller.convert_file(input_file, output_filename=None, colormap="viridis")
 ```
 
-`convert_file` reads the file whose path is `input_file` and write
+`convert_file` reads the file whose path is `input_file` and writes
 it to an output file.
 
 Arguments:
