@@ -73,8 +73,11 @@ Arguments:
 The input file is read and the image is converted to the "viridis"
 colormap. Then, the converted image is written to an output file. The
 name of the output file is determined from the name of the input file
-by prefixing it with "output_". If the output file already exists,
-it is overwritten without warning.
+by suffixing it with "_output" before the extension. For example,
+if the input file is "test/image.png", the default output is
+"test/image_output.png".
+
+If the output file already exists, it is overwritten without warning.
 
 
 #### Colormap Selection
