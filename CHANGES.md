@@ -6,6 +6,7 @@
   convert_array).
 - new: improved documentation.
 - update: new management of default output filename.
+- fix: unit tests now cover the main features.
 
 ## v0.8.0
 
