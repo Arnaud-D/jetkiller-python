@@ -69,8 +69,6 @@ See [CHANGES.md](CHANGES.md) for more details on the content of each release.
 
 The development of Jet Killer will approximately follow this roadmap:
 
-- automated tests,
-- direct interface to and from the Image type of Pillow,
 - GUI to have a more friendly interface
 - script for GIMP (probably with Python-Fu)
 - script for Inkscape (probably using Python)
