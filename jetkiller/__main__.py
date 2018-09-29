@@ -4,19 +4,19 @@ import jetkiller.file as jkfi
 import jetkiller.config as cfg
 
 
-def parse_args():
+def parse_args(argv):
     """Parse command line arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument("input_file")
     parser.add_argument("output_file", nargs="?", default=None)
     parser.add_argument("-cm", "--colormap", type=str, default=cfg.default_output_colormap)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     return args
 
 
-def main():
+def main(argv=None):
     """Main entry-point."""
-    args = parse_args()
+    args = parse_args(argv)
 
     try:
         jkfi.convert_file(args.input_file, args.output_file, args.colormap)
