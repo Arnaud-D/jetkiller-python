@@ -45,3 +45,10 @@ def test_convert_file_7():
     with pytest.raises(Exception) as e:
         jetkiller.convert_file("tests/test_data/generate_test_images.py", "tests/test_data/protected_output_file.png")
     assert e.type == OSError
+
+
+def test_convert_file_8():
+    """File not found."""
+    with pytest.raises(Exception) as e:
+        jetkiller.convert_file("tests/test_data/not_existing.png", "tests/test_data/protected_output_file.png")
+    assert e.type == FileNotFoundError

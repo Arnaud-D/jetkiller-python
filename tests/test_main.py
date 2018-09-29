@@ -82,3 +82,12 @@ def test_main_9():
         __main__.main(argv)
     assert e.type == SystemExit
     assert e.value.code == "OSError"
+
+
+def test_main_10():
+    """File not found."""
+    with pytest.raises(SystemExit) as e:
+        argv = ["tests/test_data/not_existing.png", "tests/test_data/wrong_type.png"]
+        __main__.main(argv)
+    assert e.type == SystemExit
+    assert e.value.code == "FileNotFoundError"
