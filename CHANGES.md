@@ -4,6 +4,8 @@
 
 - new: new entry points from Python (convert_file, convert_image,
   convert_array).
+- new: improved documentation.
+- update: new management of default output filename.
 
 ## v0.8.0
 
