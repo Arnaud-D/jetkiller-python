@@ -113,3 +113,79 @@ short form `-cm`. Any value from the
 [matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
 is recognized. In the absence of the colormap argument, the colormap
 defaults to "viridis".
+
+
+### Python Package
+
+#### Convert an image file
+
+```
+import jetkiller
+jetkiller.convert_file(input_file, output_filename=None, colormap="viridis")
+```
+
+`convert_file` reads the file whose path is `input_file` and write
+it to an output file.
+
+Arguments:
+
+* `input_file`: path to the input file,
+* `output_filename`: path to the output file,
+* `colormap`: name of the colormap.
+
+The path to the output file is specified using  the argument
+`output_filename`. If it is not specified ("None"), then the output
+file is determined from the input file by suffixing it with "_output"
+before the extension. If the output file already exist, it is
+overwritten without warning.
+
+The colormap can be chosen by using the `colormap` argument. The
+default value is "viridis". Any colormap from the
+[matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
+is recognized.
+
+#### Convert a PIL.Image object
+
+```
+import jetkiller
+image_converted = jetkiller.convert_image(image, colormap="viridis")
+```
+
+`convert_image` reads a PIL.Image and converts it to a PIL.Image.
+
+Arguments:
+
+* `image`: PIL.Image object,
+* `colormap`: name of the colormap.
+
+This function allows to process an image with Pillow/PIL before
+converting them to another colormap. A typical use case is to limit
+the conversion to a region instead of the whole image.
+
+The colormap can be chosen by using the `colormap` argument. The
+default value is "viridis". Any colormap from the
+[matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
+is recognized.
+
+#### Convert an array
+
+```
+import jetkiller
+data_converted = jetkiller.convert_array(data, colormap="viridis")
+```
+
+`convert_image` takes an array and converts it in place.
+
+Arguments:
+
+* `data`: h-by-w-by-3 array,
+* `colormap`: name of the colormap.
+
+Sometimes, it can be useful to work directly with an array. The array
+is 3-dimensional, with each dimension representing respectively
+the height of the image, the width image, and the pixel components.
+
+The colormap can be chosen by using the `colormap` argument. The
+default value is "viridis". Any colormap from the
+[matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
+is recognized.
