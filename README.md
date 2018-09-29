@@ -25,6 +25,9 @@ and the `jetkiller` package:
 pip install jetkiller
 ```
 
+For details and alternative installation methods,
+read the [user guide](docs/user_guide.md).
+
 
 ## Basic Usage
 
@@ -40,35 +43,19 @@ For more details, read the [user guide](docs/user_guide.md).
 
 ### From Python
 
-If you wish to use Jet Killer from Python, you can
-import the `jetkiller` package and use the `jetkiller` function:
+To convert images, import the `jetkiller` package and
+use the `jetkiller.convert_file` function:
 
 ```python
-import jetkiller as jk
-jk.jetkiller("input_image.png", "output_image.png")
+import jetkiller
+jetkiller.convert_file("input_image.png", "output_image.png")
 ```
 
-The second argument is optional and defaults to "output.png", so that
-you can write:
+For more details, read the [user guide](docs/user_guide.md).
 
-```python
-import jetkiller as jk
-jk.jetkiller("input_image.png")
-```
+## Documentation
 
-If the file "output.png" already exists, it is overwritten without any
-warning.
-
-You can change the output colormap (by default "viridis") with
-the `colormap` argument. Any value from the
-[matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
-is recognized.
-
-```python
-import jetkiller as jk
-jk.jetkiller("input_image.png", "output_image.png", colormap="inferno")
-```
-
+The reference documentation is the [user guide](docs/user_guide.md).
 
 ## Release History
 
