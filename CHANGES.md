@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.9.0
+
+- new: new entry points from Python (convert_file, convert_image,
+  convert_array).
+
 ## v0.8.0
 
 - new: the output colormap can be changed (from command-line or

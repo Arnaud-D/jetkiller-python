@@ -26,11 +26,9 @@ pip install jetkiller
 ```
 
 
-## Usage
+## Basic Usage
 
 ### From the Command Line
-
-Jet Killer is designed to be used mainly from the command line.
 
 Use the following command to convert `input_file` to `output_file`:
 
@@ -38,24 +36,7 @@ Use the following command to convert `input_file` to `output_file`:
 jetkiller input_file output_file
 ```
 
-If you omit the argument `output_file`, Jet Killer converts
-`input_file` to "output.png" by default:
-
-```
-jetkiller input_file
-```
-
-If the file "output.png" already exists, it is overwritten without any
-warning.
-
-You can change the output colormap (by default "viridis") with
-the `--colormap` option. Any value from the
-[matplotlib colormaps](https://matplotlib.org/users/colormaps.html)
-is recognized. Here is an example using the colormap "inferno":
-
-```
-jetkiller input_file output_file --colormap inferno
-```
+For more details, read the [user guide](docs/user_guide.md).
 
 ### From Python
 
