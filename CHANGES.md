@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.9.0
+## v0.9.0 / v0.9.1
 
 - new: new entry points from Python (convert_file, convert_image,
   convert_array).
