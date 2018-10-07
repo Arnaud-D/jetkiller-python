@@ -3,20 +3,47 @@ import tkinter.filedialog as fd
 import jetkiller as jk
 from PIL import Image
 import PIL.ImageTk as PilTk
+import sys
 
 
-def update_previews(input_1, menu_var, input_preview, output_preview):
-    # Input preview
-    input_image = Image.open(input_1.get())
-    input_image_preview = input_image.resize((300, 300))
-    tk_image = PilTk.PhotoImage(input_image_preview)
-    input_preview.tk_image = tk_image  # keep a reference to avoid deletion by garbage collector
-    input_preview.create_image(0, 0, image=input_preview.tk_image, anchor=tk.NW)
+def scaling_transform(w1, h1, w2, h2):
+    r1 = w1 / h1
+    r2 = w2 / h2
+    if r1 <= r2:
+        h = h2
+        w = r1 * h2
+    else:
+        w = w2
+        h = w2 / r1
+    return w, h
 
-    # Output preview
-    output_image_preview = jk.convert_image(input_image_preview,  colormap=menu_var.get())
-    output_preview.tk_image = PilTk.PhotoImage(output_image_preview)
-    output_preview.create_image(0, 0, image=output_preview.tk_image, anchor=tk.NW)
+
+def update_preview(image, preview_canvas):
+    frame_width, frame_height = int(preview_canvas["width"]), int(preview_canvas["height"])
+    w1, h1 = image.width, image.height
+    w, h = scaling_transform(w1, h1, frame_width, frame_height)
+    image_miniature = image.resize((int(w), int(h)))
+    tk_miniature = PilTk.PhotoImage(image_miniature)
+    preview_canvas.create_image(frame_width / 2, frame_height / 2, image=tk_miniature)
+    preview_canvas.tk_miniature = tk_miniature  # reference to avoid garbage collection
+    return image_miniature
+
+
+def update_previews(input_1, menu_var, input_preview_canvas, output_preview):
+    # TODO: investigate problem with alpha channel
+
+    try:
+        # Open image
+        filename = input_1.get()
+        input_image = Image.open(filename)
+        input_miniature = update_preview(input_image, input_preview_canvas)
+        output_miniature = jk.convert_image(input_miniature, colormap=menu_var.get())
+        update_preview(output_miniature, output_preview)
+
+    except AttributeError as e:
+        print("Error 1:", e, file=sys.stderr)
+    except IOError as e:
+        print("Error 2:", e, file=sys.stderr)
 
 
 def browse_click(input_1, cm_menu, input_preview, output_preview):
@@ -28,8 +55,13 @@ def browse_click(input_1, cm_menu, input_preview, output_preview):
 
 
 def save_click(input_1, v):
-    file = fd.asksaveasfilename()
-    jk.convert_file(input_1.get(), file, colormap=v.get())
+    filename = fd.asksaveasfilename()
+    try:
+        jk.convert_file(input_1.get(), filename, colormap=v.get())
+    except AttributeError as e:
+        print("Error 3:", e, file=sys.stderr)
+    except ValueError as e:
+        print("Error 4:", e, file=sys.stderr)
 
 
 def main():
@@ -37,11 +69,11 @@ def main():
     root.title("Jet Killer")
 
     # Preview of input file
-    input_preview = tk.Canvas(root, width=300, height=300, bg="yellow")
+    input_preview = tk.Canvas(root, width=300, height=300)
     input_preview.grid(column=0, row=2, columnspan=2)
 
     # Preview of output file
-    output_preview = tk.Canvas(root, width=300, height=300, bg="green")
+    output_preview = tk.Canvas(root, width=300, height=300)
     output_preview.grid(column=2, row=2, columnspan=2)
 
     # File choice
