@@ -8,7 +8,6 @@ def test_main_1():
         argv = None
         __main__.main(argv)
     assert e.type == SystemExit
-    assert e.value.code == 2
 
 
 def test_main_2():
