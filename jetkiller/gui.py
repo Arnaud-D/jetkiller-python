@@ -72,35 +72,62 @@ def save_click(input_1, v):
 def main():
     root = tk.Tk()
     root.title("Jet Killer")
+    root.config(padx=30)
+    root.config(pady=5)
+
+    # Parameters zone
+    parameters = tk.LabelFrame(root, text="Parameters")
+    parameters.grid(column=0, row=0, sticky=tk.W + tk.E + tk.N + tk.S, pady=5)
+    parameters.config(padx=10)
+    parameters.config(pady=10)
+
+    # Preview zone
+    preview = tk.LabelFrame(root, text="Preview")
+    preview.grid(column=0, row=1, sticky=tk.W + tk.E + tk.N + tk.S, pady=5)
+    preview.config(padx=10)
+    preview.config(pady=10)
+
+    # Save zone
+    save = tk.Frame(root)
+    save.grid(column=0, row=2, sticky=tk.E, pady=5)
+    save.config()
 
     # Preview of input file
-    input_preview_canvas = tk.Canvas(root, width=300, height=300)
-    input_preview_canvas.grid(column=0, row=2, columnspan=2)
+    input_preview_label = tk.Label(preview, text="Input")
+    input_preview_label.grid(column=0, row=0)
+    input_preview_canvas = tk.Canvas(preview, width=400, height=200)
+    input_preview_canvas.grid(column=0, row=1)
 
     # Preview of output file
-    output_preview_canvas = tk.Canvas(root, width=300, height=300)
-    output_preview_canvas.grid(column=2, row=2, columnspan=2)
+    output_preview_label = tk.Label(preview, text="Output")
+    output_preview_label.grid(column=1, row=0)
+    output_preview_canvas = tk.Canvas(preview, width=400, height=200)
+    output_preview_canvas.grid(column=1, row=1)
 
     # Input file entry
-    input_file_prompt = tk.Label(root, text="Input file:")
-    input_file_prompt.grid(column=0, row=0)
-    input_file_entry = tk.Entry(root)
+    input_file_prompt = tk.Label(parameters, text="Input file:")
+    input_file_prompt.grid(column=0, row=0, sticky=tk.W)
+    input_file_entry = tk.Entry(parameters, width=75)
     input_file_entry.grid(column=1, row=0)
-    input_file_browse_button = tk.Button(root, text="...")
+    input_file_browse_button = tk.Button(parameters, text="...")
     input_file_browse_button.grid(column=2, row=0)
 
     # Colormap menu
-    colormap_prompt = tk.Label(root, text="Colormap:")
-    colormap_prompt.grid(column=0, row=1)
+    colormap_prompt = tk.Label(parameters, text="Colormap:")
+    colormap_prompt.grid(column=0, row=1, sticky=tk.W)
     colormap_var = tk.StringVar()
-    colormap_options = ("viridis", "plasma", "inferno", "magma")  # TODO: add other  colormap choices for matplotlib
+    colormap_options = ("viridis", "plasma", "inferno", "magma")  # TODO: add other colormap choices for matplotlib
     colormap_var.set("viridis")
-    colormap_menu = tk.OptionMenu(root, colormap_var, *colormap_options)
-    colormap_menu.grid(column=1, row=1, columnspan=2)
+    colormap_menu = tk.OptionMenu(parameters, colormap_var, *colormap_options)
+    colormap_menu.grid(column=1, row=1, columnspan=2, sticky=tk.W)
 
     # Save button
-    save_button = tk.Button(root, text="Convert and save")
-    save_button.grid(column=3, row=0, rowspan=2, sticky=tk.N+tk.S)
+    save_button = tk.Button(save, text="Convert and save")
+    save_button.grid(column=0, row=0)
+
+    # Quit button
+    quit_button = tk.Button(save, text="Quit")
+    quit_button.grid(column=1, row=0)
 
     # Actions
     def input_file_browse_button_action():
@@ -114,6 +141,7 @@ def main():
 
     input_file_browse_button["command"] = input_file_browse_button_action
     save_button["command"] = save_button_action
+    quit_button["command"] = root.quit
     colormap_var.trace("w", colormap_action)
 
     # Main loop
