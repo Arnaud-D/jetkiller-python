@@ -4,7 +4,7 @@ import functools
 import jetkiller.config as cfg
 
 # Internal package parameters
-_colormap_size = 256
+_colormap_size = 512
 _nint = 255
 _type = float
 _cache_size = 1024
