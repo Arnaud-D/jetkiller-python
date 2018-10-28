@@ -5,7 +5,7 @@ one (by default "viridis") by using directly the pixel values,
 without any knowledge about the underlying data.
 
 It can be used as a tool to enhance data visualizations for which
-the original dataset is unavailable. Use cases include :
+the original dataset is unavailable. Use cases include:
 
 * enhancing figures from sources who made an unfortunate
   colormap choice,
@@ -30,6 +30,17 @@ read the [user guide](docs/user_guide.md).
 
 
 ## Basic Usage
+
+### With the GUI
+
+To launch the GUI, use the following command:
+
+```
+jetkiller --gui
+```
+
+![Principle](docs/screenshot_gui.png)
+
 
 ### From the Command Line
 
@@ -67,11 +78,13 @@ See [CHANGES.md](CHANGES.md) for more details on the content of each release.
 
 ## Development Roadmap
 
-The development of Jet Killer will approximately follow this roadmap:
+The standalone version of Jet Killer is considered as complete
+and will not have any major new features.
 
-- GUI to have a more friendly interface
-- script for GIMP (probably with Python-Fu)
-- script for Inkscape (probably using Python)
+Here are a few ideas on how to further improve the user experience:
+
+- develop an extension for GIMP (probably with Python-Fu)
+- develop an extension for Inkscape (probably using Python)
 
 
 ## Versioning
