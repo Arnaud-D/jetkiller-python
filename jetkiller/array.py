@@ -44,5 +44,5 @@ def convert_array(data, colormap=cfg.default_output_colormap):
         for j in dim2:
             r, g, b = data[i, j, 0], data[i, j, 1], data[i, j, 2]
             if r != g or g != b:  # Grey pixels are not processed
-                data[i, j] = convert_pixel(r, g, b)
+                data[i, j, 0:3] = convert_pixel(r, g, b)
     return data

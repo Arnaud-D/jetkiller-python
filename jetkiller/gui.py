@@ -33,7 +33,6 @@ def update_preview(image, preview_canvas):
 
 def update_previews(input_1, menu_var, input_preview_canvas, output_preview):
     """Update the input and output preview canvases from interface data."""
-    # TODO: investigate problem with alpha channel
 
     try:
         # Open image

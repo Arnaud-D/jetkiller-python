@@ -14,7 +14,8 @@ def convert_image(image, colormap=cfg.default_output_colormap):
 
 def array2image(array):
     """Convert an array to an image."""
-    return Image.fromarray(array, mode=cfg.mode)
+    mode = "RGB" if array.shape[2] == 3 else "RGBA"
+    return Image.fromarray(array, mode=mode)
 
 
 def image2array(image):
