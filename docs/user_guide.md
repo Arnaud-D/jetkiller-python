@@ -33,6 +33,30 @@ From there, you can proceed according to your own needs.
 
 ## Usage
 
+### Using the GUI
+
+The GUI is the simplest way to use Jet Killer. To launch Jet Killer
+in GUI mode, use the following command (available when Jet Killer was
+installed with `pip`):
+
+```
+jetkiller --gui
+```
+
+![Principle](screenshot_gui.png)
+
+Using the GUI, you can:
+
+* choose the file to convert using the input file area
+  and the "..." button,
+* select the colormap with the drop-down menu,
+* preview the result in the preview area, which is updated
+  automatically,
+* convert the image and select the output file using
+  the "Convert and Save" button,
+
+When you've finished working, click on the "Quit" button.
+
 ### Command Line Interface
 
 When installed through `pip`, Jet Killer provide a command line
