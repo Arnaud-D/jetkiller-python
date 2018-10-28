@@ -39,7 +39,7 @@ To launch the GUI, use the following command:
 jetkiller --gui
 ```
 
-![Principle](docs/screenshot_gui.png)
+![Screenshot of the GUI](docs/screenshot_gui.png)
 
 
 ### From the Command Line
