@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.0.1
+### Changed
+- Fix compatibility with numpy >= 16.0.0 and pillow >= 7.0.0
+
 ## v1.0.0
 
 - new: graphical user interface
