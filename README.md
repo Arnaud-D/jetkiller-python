@@ -18,11 +18,13 @@ the original dataset is unavailable. Use cases include:
 
 ## Installation
 
+To install and use Jet Killer, Python 3 is required.
+
 The following command installs the `jetkiller` command
 and the `jetkiller` package:
 
 ```
-pip install jetkiller
+pip3 install jetkiller
 ```
 
 For details and alternative installation methods,

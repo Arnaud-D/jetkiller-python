@@ -2,16 +2,18 @@
 
 ## Installation
 
+Jet Killer requires Python 3. Python 2 is not supported.
+
 ### From PyPI
 
 The recommended way to get Jet Killer is to install it from PyPI using
-`pip`. If `pip` is not installed on your system, you will have to
-install it.
+`pip3` (to ensure that Python 3 is used). If `pip3` is not installed on
+your system, you will have to install it.
 
 To instal Jet Killer, execute the following command:
 
 ```
-pip install jetkiller
+pip3 install jetkiller
 ```
 
 It will install the `jetkiller` command and the `jetkiller` package.
@@ -59,7 +61,7 @@ When you've finished working, click on the "Quit" button.
 
 ### Command Line Interface
 
-When installed through `pip`, Jet Killer provide a command line
+When installed through `pip3`, Jet Killer provide a command line
 interface through the `jetkiller` command.
 
 #### Full Syntax
