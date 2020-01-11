@@ -42,9 +42,8 @@ def test_convert_file_6():
 
 def test_convert_file_7():
     """Wrong input type"""
-    with pytest.raises(Exception) as e:
+    with pytest.raises(Exception):
         jetkiller.convert_file("tests/test_data/generate_test_images.py", "tests/test_data/protected_output_file.png")
-    assert e.type == OSError
 
 
 def test_convert_file_8():

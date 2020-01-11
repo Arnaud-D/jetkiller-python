@@ -80,7 +80,6 @@ def test_main_9():
         argv = ["tests/test_data/generate_test_images.py", "tests/test_data/wrong_type.png"]
         __main__.main(argv)
     assert e.type == SystemExit
-    assert e.value.code == "OSError"
 
 
 def test_main_10():
