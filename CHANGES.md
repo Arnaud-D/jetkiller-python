@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.0.2 - 2020-01-12
+### Changed
+- Improve error messages on the command line.
+- Improve documentation with regards to Python 3.
+
 ## v1.0.1
 ### Changed
 - Fix compatibility with numpy >= 16.0.0 and pillow >= 7.0.0
