@@ -5,14 +5,14 @@ import jetkiller.config as cfg
 import jetkiller.gui as gui
 
 
-def parse_args():
+def parse_args(argv):
     """Parse command line arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument("-g", "--gui", action='store_true', help="start with the graphical interface")
     parser.add_argument("input_file", nargs="?", default=None, help="file to be processed")
     parser.add_argument("output_file", nargs="?", default=None, help="file recording the result")
     parser.add_argument("-cm", "--colormap", type=str, default=cfg.default_output_colormap, help="choose a colormap")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
         sys.exit(1)
@@ -34,9 +34,9 @@ def main_gui():
     gui.main()
 
 
-def main():
+def main(argv=None):
     """Main entry-point."""
-    args = parse_args()
+    args = parse_args(argv)
     if args.gui:
         main_gui()
     else:
@@ -44,4 +44,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)
