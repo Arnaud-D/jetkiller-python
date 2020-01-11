@@ -20,6 +20,5 @@ def array2image(array):
 
 def image2array(image):
     """Convert an image to an array."""
-    data = np.asarray(image)
-    data.setflags(write=True)
+    data = np.copy(np.asarray(image))
     return data
