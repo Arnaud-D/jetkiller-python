@@ -1,5 +1,10 @@
 # Change Log
 
+## [Unreleased] - XXXX-XX-XX
+### Added 
+- Make the cividis colormap avaible in the graphical user interface
+
+
 ## v1.0.2 - 2020-01-12
 ### Changed
 - Improve error messages on the command line.

@@ -115,7 +115,7 @@ def main():
     colormap_prompt = tk.Label(parameters, text="Colormap:")
     colormap_prompt.grid(column=0, row=1, sticky=tk.W)
     colormap_var = tk.StringVar()
-    colormap_options = ("viridis", "plasma", "inferno", "magma")
+    colormap_options = ("viridis", "plasma", "inferno", "magma", "cividis")
     colormap_var.set("viridis")
     colormap_menu = tk.OptionMenu(parameters, colormap_var, *colormap_options)
     colormap_menu.grid(column=1, row=1, columnspan=2, sticky=tk.W)
