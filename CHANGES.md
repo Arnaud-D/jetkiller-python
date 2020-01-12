@@ -1,7 +1,8 @@
 # Change Log
 
-## [Unreleased] - XXXX-XX-XX
-### Added 
+
+## [v1.1.0] - 2020-01-12
+### Added
 - Make the cividis colormap avaible in the graphical user interface
 
 ### Changed

@@ -5,12 +5,12 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="jetkiller",
-    version="1.0.2",
+    version="1.1.0",
     author="Arnaud-D",
     description="Enhance data visualizations using the \"jet\" colormap.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Arnaud-D/jetkiller",
+    url="https://github.com/Arnaud-D/jetkiller-python",
     packages=setuptools.find_packages(),
     classifiers=[
         "License :: OSI Approved :: MIT License",
