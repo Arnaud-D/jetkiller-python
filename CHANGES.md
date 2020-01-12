@@ -4,6 +4,9 @@
 ### Added 
 - Make the cividis colormap avaible in the graphical user interface
 
+### Changed
+- Improve error management in the graphical user interface
+
 
 ## v1.0.2 - 2020-01-12
 ### Changed

@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.filedialog as fd
+import tkinter.messagebox
 import jetkiller as jk
 from PIL import Image
 import PIL.ImageTk as PilTk
@@ -33,19 +34,20 @@ def update_preview(image, preview_canvas):
 
 def update_previews(input_1, menu_var, input_preview_canvas, output_preview):
     """Update the input and output preview canvases from interface data."""
-
+    input_filename = input_1.get()
+    if input_filename == "":  # do not update preview if input filename is empty
+        return
     try:
         # Open image
-        filename = input_1.get()
-        input_image = Image.open(filename)
+        input_image = Image.open(input_filename)
         input_miniature = update_preview(input_image, input_preview_canvas)
         output_miniature = jk.convert_image(input_miniature, colormap=menu_var.get())
         update_preview(output_miniature, output_preview)
-
-    except AttributeError as e:
-        print("Error 1:", e, file=sys.stderr)
-    except IOError as e:
+    except IOError as e:  # due to "Image.open"
         print("Error 2:", e, file=sys.stderr)
+        tk.messagebox.showerror("Preview error",
+                                "Cannot update the preview because file '{}' could not be read. "
+                                "Check that the file exists and that its format is supported.".format(input_filename))
 
 
 def browse_click(input_1, cm_menu, input_preview, output_preview):
@@ -59,13 +61,26 @@ def browse_click(input_1, cm_menu, input_preview, output_preview):
 
 def save_click(input_1, v):
     """Action when clicking on the save button."""
-    filename = fd.asksaveasfilename()
+    output_filename = fd.asksaveasfilename()
+    input_filename = input_1.get()
     try:
-        jk.convert_file(input_1.get(), filename, colormap=v.get())
+        jk.convert_file(input_filename, output_filename, colormap=v.get())
     except AttributeError as e:
         print("Error 3:", e, file=sys.stderr)
     except ValueError as e:
         print("Error 4:", e, file=sys.stderr)
+        tkinter.messagebox.showerror("Format error",
+                                     "Cannot save to file '{}' because the format is "
+                                     "not unsupported.".format(output_filename))
+    except FileNotFoundError as e:
+        print("Error 5:", e, file=sys.stderr)
+        tkinter.messagebox.showerror("Conversion error",
+                                     "Cannot convert file '{}' because it does not exist.".format(input_filename))
+    except PermissionError as e:
+        print("Error 6:", e, file=sys.stderr)
+        tkinter.messagebox.showerror("Save error",
+                                     "Cannot save to file '{}' because of insufficient permissions. "
+                                     "The file might be write-protected.".format(output_filename))
 
 
 def main():
